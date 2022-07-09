@@ -8,7 +8,7 @@ const RowButton: React.FunctionComponent = ({
     <td>
       <div className="flex justify-center">
         <Link href={link}>
-          <button className=" bg-blue-600 rounded-md text-white outline-none focus:ring-4 shadow-lg">
+          <button className=" bg-blue-600 w-full rounded-md text-white outline-none focus:ring-4 shadow-lg">
             {text}
           </button>
         </Link>
