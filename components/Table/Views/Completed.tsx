@@ -1,16 +1,15 @@
-// import { PDFDownloadLink } from "@react-pdf/renderer";
 import Link from "next/link";
 import { QueueObject } from "../../../interfaces/QueueObject";
-import Receipt from "../../Receipt";
 import { Row } from "../Row";
 import { RowButton } from "../RowButton";
 import { PDFDownloadLink } from "@react-pdf/renderer/lib/react-pdf.browser.cjs.js";
+import Receipt from "../../Receipt";
 
-type Props = { orders: QueueObject; tasks: any; brands: any };
+type Props = { orders: QueueObject; workTasks: any; brands: any };
 
 const CompletedTable: React.FunctionComponent<Props> = ({
   orders,
-  tasks,
+  workTasks,
   brands,
 }) => (
   <table className="min-w-max w-full table-auto">
@@ -44,18 +43,35 @@ const CompletedTable: React.FunctionComponent<Props> = ({
                       : null
                   }
                 />
-                <Row input={"insert work task here"} />
-                <Row input={"insert brand"} />
+                <Row
+                  input={
+                    workTasks.find(
+                      (task: any) => task.id === order.work_task_id
+                    )?.name
+                  }
+                />
+                <Row
+                  input={
+                    brands.find((brand: any) => brand.id === order.brand_id)
+                      ?.name
+                  }
+                />
                 <Row input={order.final_units_or_quantity} />
                 <Row input={`${order.minutes_taken} mins`} />
+                {/* <RowButton
+                  link={'order.receipt_pdf_url'}
+                  text="Get Receipt"
+                /> */}
                 <td>
-                  <div className="flex justify-center">
+                  <div className="flex justify-center bg-blue-600 rounded-md ">
                     <PDFDownloadLink
                       document={
                         <Receipt
                           order={order}
                           brand={brands.find((x) => x.id === order.brand_id)}
-                          task={tasks.find((x) => x.id == order.work_task_id)}
+                          task={workTasks.find(
+                            (x) => x.id == order.work_task_id
+                          )}
                         />
                       }
                       fileName="recipt"

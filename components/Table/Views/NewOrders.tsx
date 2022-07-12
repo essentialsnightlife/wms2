@@ -41,7 +41,13 @@ const NewOrderTable: React.FunctionComponent<Props> = ({
                       : null
                   }
                 />
-                <Row input={order?.task_name} />
+                <Row
+                  input={
+                    tasks.find(
+                      (task) => task.id === order.work_task_id
+                    )?.name
+                  }
+                />
                 <Row input={order.initial_units_or_quantity} />
                 <Row input={order.brand_entry} />
                 <RowButton

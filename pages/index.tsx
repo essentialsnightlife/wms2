@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { NextPage } from 'next';
 import Page from '../components/Page';
-import { fetchAllOrders } from '../data/services';
+import { fetchOrdersTrackerStatus } from '../data/services';
 import NewOrderTable from '../components/Table/Views/NewOrders';
 
 const IndexPage: NextPage = () => {
@@ -9,7 +9,7 @@ const IndexPage: NextPage = () => {
   const [workTasks, setWorkTasks] = useState([]);
 
   useEffect(() => {
-    fetchAllOrders().then((data: any) => {
+    fetchOrdersTrackerStatus(0).then((data: any) => {
       if (data.orders) {
         setOrders(data.orders);
       }

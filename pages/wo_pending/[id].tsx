@@ -87,6 +87,7 @@ const Index: NextPage = (props) => {
       .from('order')
       .update(formData)
       .eq('id', props.id);
+    console.log(data);
     if (error) {
       console.log(error.message);
     }

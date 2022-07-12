@@ -59,7 +59,17 @@ export const findWorkTask = async (workOrderId) => {
 export const fetchOrdersTrackerStatus = async (status) => {
   const orders = await fetchOrdersFilter('tracker_status', status);
   const workTasks = await fetchWorkTasks();
-  return { orders, workTasks };
+  const workers = await fetchWorkers();
+  const brands = await fetchBrands();
+  return { orders, workTasks, workers, brands };
+};
+
+export const fetchOrdersInProgress = async () => {
+  const orders = await fetchOrdersFilter('tracker_status', 2);
+  const workTasks = await fetchWorkTasks();
+  const workers = await fetchWorkers();
+  const brands = await fetchBrands();
+  return { orders, workTasks, workers, brands };
 };
 
 export const getTableInformation = async (name) => {

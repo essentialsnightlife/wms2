@@ -50,7 +50,7 @@ const ClientInfo: React.FunctionComponent<Props> = ({ order, brand }) => (
       </View>
       <View style={styles.row}>
         <Text style={styles.col1}>Brand</Text>
-        <Text style={styles.col2}>{brand.name}</Text>
+        <Text style={styles.col2}>{brand?.name}</Text>
       </View>
       <View style={styles.row}>
         <Text style={styles.col1}>Email</Text>

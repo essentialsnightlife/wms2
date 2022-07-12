@@ -1,14 +1,19 @@
 import { WIPObject } from '../../../interfaces/WIPObject';
-import {
-  getBrandName,
-  getWorkerName,
-  getWorkOrder,
-} from '../../../helpers/helpers';
 import Link from 'next/link';
 
-type Props = { orders: WIPObject, workers:any };
+type Props = {
+  orders: WIPObject;
+  workers: any;
+  workTasks: any;
+  brands: any;
+};
 
-const WIPTable: React.FunctionComponent<Props> = ({ orders, workers }) => (
+const WIPTable: React.FunctionComponent<Props> = ({
+  orders,
+  workers,
+  workTasks,
+  brands,
+}) => (
   <table className="min-w-max w-full table-auto">
     <thead>
       <tr className="bg-blue-200 text-gray-600 uppercase text-sm leading-normal">
@@ -63,7 +68,14 @@ const WIPTable: React.FunctionComponent<Props> = ({ orders, workers }) => (
                 {/* work order */}
                 <td className="py-3 px-6 text-center">
                   <div className="flex items-center justify-center">
-                    <span>{getWorkOrder(order.id)}</span>
+                    <span>
+                      {
+                        workTasks.find(
+                          (task: any) =>
+                            task.id === order.work_task_id
+                        )?.name
+                      }
+                    </span>
                   </div>
                 </td>
                 {/* units */}
@@ -77,8 +89,12 @@ const WIPTable: React.FunctionComponent<Props> = ({ orders, workers }) => (
                 <td className="py-3 px-6 text-center">
                   <div className="flex items-center justify-center">
                     <span>
-                    {workers.find((worker) => worker.id === order.assigned_to_id)?.name}
-
+                      {
+                        workers.find(
+                          (worker: any) =>
+                            worker.id === order.assigned_to_id
+                        )?.name
+                      }
                     </span>
                   </div>
                 </td>
@@ -91,7 +107,13 @@ const WIPTable: React.FunctionComponent<Props> = ({ orders, workers }) => (
                 {/* brand */}
                 <td className="py-3 px-6 text-center">
                   <div className="flex items-center justify-center">
-                    <span>{getBrandName(order.brand_id)}</span>
+                    <span>
+                      {
+                        brands.find(
+                          (brand: any) => brand.id === order.brand_id
+                        )?.name
+                      }
+                    </span>
                   </div>
                 </td>
                 {/* intiial cost */}

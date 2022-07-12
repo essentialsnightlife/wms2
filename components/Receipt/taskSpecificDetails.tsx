@@ -46,11 +46,11 @@ const TaskSpecificDetails: React.FunctionComponent<Props> = ({ order, specifics 
     <View style={styles.container}>
       <View style={styles.row}>
         <Text style={styles.col1}>Specific Field 1</Text>
-        <Text style={styles.col2}></Text>
+        <Text style={styles.col2}>n/a</Text>
       </View>
       <View style={styles.row}>
         <Text style={styles.col1}>Specific Field 1</Text>
-        <Text style={styles.col2}></Text>
+        <Text style={styles.col2}>n/a</Text>
       </View>
       <View style={styles.row}>
         <Text style={styles.col1}>Thread Color</Text>

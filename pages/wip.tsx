@@ -3,19 +3,27 @@ import * as React from 'react';
 import TableWip from '../components/Table/Views/WIP';
 import { NextPage } from 'next';
 import Page from '../components/Page';
-import { fetchOrdersTrackerStatus } from '../data/services';
+import { fetchOrdersInProgress } from '../data/services';
 
 const WIPPage: NextPage = () => {
-  const [WIPOrders, setWIPOrders] = useState(null);
-  const [workers, setWorkers] = useState(null);
+  const [WIPOrders, setWIPOrders] = useState([]);
+  const [workers, setWorkers] = useState([]);
+  const [workTasks, setWorkTasks] = useState([]);
+  const [brands, setBrands] = useState([]);
 
   useEffect(() => {
-    fetchOrdersTrackerStatus(2).then((data: any) => {
+    fetchOrdersInProgress().then((data: any) => {
       if (data.orders) {
-        setWIPOrders(data.orders || [{}]);
+        setWIPOrders(data.orders);
       }
       if (data.workers) {
-        setWorkers(data.workers || [{}]);
+        setWorkers(data.workers);
+      }
+      if (data.workTasks) {
+        setWorkTasks(data.workTasks);
+      }
+      if (data.brands) {
+        setBrands(data.brands);
       }
     });
     return () => {};
@@ -25,7 +33,12 @@ const WIPPage: NextPage = () => {
     <>
       <Page layoutTitle="Work Orders In Progress | Work Management System | TuPack">
         {WIPOrders ? (
-          <TableWip orders={WIPOrders} workers={workers} />
+          <TableWip
+            orders={WIPOrders}
+            workers={workers}
+            workTasks={workTasks}
+            brands={brands}
+          />
         ) : (
           <div>Loading Table...</div>
         )}
